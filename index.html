@@ -205,7 +205,7 @@
           </div>
           <br>
           <div class="fade-in">
-            <p>풀스택 개발자가 되기 위해 노력 중이에요!</p>
+            <p>풀스택 개발자가 되기 위해 노력 중이에요!</p><br>
           </div>
 
           <div class="fade-in photo-gallery" style="margin-top:60px;">
@@ -235,11 +235,26 @@
           </div>
         </div>
       `;
-
       document.body.appendChild(intro);
       requestAnimationFrame(() => intro.style.opacity = "1");
+      const introSection = intro.querySelector(".intro-section");
+      const targetPara = introSection.querySelectorAll("p")[0]; // '풀스택 개발자~' 문단
 
-      const thumbnailElements = intro.querySelectorAll(".thumbnail");
+      const count = localStorage.getItem("visit-count") || 0;
+      const newCount = parseInt(count) + 1;
+      localStorage.setItem("visit-count", newCount);
+
+      const visitDisplay = document.createElement("div");
+      visitDisplay.textContent = `✨ 당신은 이 페이지를 ${newCount}번째 방문 중입니다 ✨`;
+      visitDisplay.style.textAlign = "center";
+      visitDisplay.style.marginTop = "20px";
+      visitDisplay.style.color = "white";
+      visitDisplay.style.fontFamily = "'noh-sori', sans-serif";
+
+      // 바로 아래에 삽입
+      targetPara.insertAdjacentElement("afterend", visitDisplay);
+
+            const thumbnailElements = intro.querySelectorAll(".thumbnail");
       const mainPhoto = intro.querySelector("#main-photo");
       thumbnailElements.forEach(thumbnail => {
         thumbnail.addEventListener("click", () => {
